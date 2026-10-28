@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   user = config.common.username;
@@ -16,6 +21,13 @@ in
   };
 
   services = {
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     gnome.sushi.enable = true;
@@ -24,6 +36,8 @@ in
       variant = "";
     };
   };
+
+  users.users.${user}.isNormalUser = lib.mkDefault true;
 
   environment.gnome.excludePackages = with pkgs; [
     gnome-tour
