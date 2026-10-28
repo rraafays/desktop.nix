@@ -9,6 +9,19 @@ let
   user = config.common.username;
 in
 {
+  fonts.enableDefaultPackages = true;
+  fonts.fontconfig.defaultFonts = {
+    sansSerif = [
+      "Noto Sans CJK SC"
+      "DejaVu Sans"
+    ];
+    serif = [
+      "Noto Serif CJK SC"
+      "DejaVu Serif"
+    ];
+    emoji = [ "Noto Color Emoji" ];
+  };
+
   i18n = {
     extraLocales = [ "zh_CN.UTF-8/UTF-8" ];
     inputMethod = {
